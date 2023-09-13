@@ -1,4 +1,6 @@
-'''
+
+
+''' original classes in VisDrone-2019 dataset
 0: pedestrian
   1: people
   2: bicycle
