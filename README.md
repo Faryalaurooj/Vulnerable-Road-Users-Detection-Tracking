@@ -20,8 +20,11 @@ class 2- Bicycles
 Upon publication, this customized dataset will be made public.
 
 ## Quick Start
+
 To run pretrained YOLOv5x models to generate object detection, follow these steps:
+
 Clone this repository into YOLO_DST:
+
 ``git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
   cd yolo_series_deepsort ``
 
