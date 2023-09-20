@@ -36,6 +36,26 @@ Upon publication, this customized dataset will be made public.
   By cloning this repo, you will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
 
+(2) Running inference 
+
+```
+```
+
+# Training your own Model
+
+To train your own YOLO models on this new custom dataset or any other dataset for VRU detection, follow these steps:
+Preparation
+
+## Requirements
+
+If you have not done so already, clone this repository into yolo_series_deepsort:
+    ```
+    git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
+    cd yolo_series_deepsort
+    pip install -r requirements.txt  # install all requirements
+    ```
+
+  
 
 
 
