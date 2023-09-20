@@ -1,5 +1,7 @@
 # Vulnerable-Road-Users-Dataset
-THis repository contains a deep learning approach based on YOLOv5x , YOLOv7x and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking.
+
+This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. YOLOv5x , YOLOv7x and YOLOv8x models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies.
+
 VRUs include all live actors which can be hit by moving vehicles on roads and are prone to much larger damage as compared to other cars. 
 ![train_batch0](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/07644322-113c-429b-a4b7-3f0cf9541dbb)
 ![val_batch0_pred](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/28ab2e28-649c-42ed-abee-41ee5c7f7c15)
@@ -21,7 +23,7 @@ Upon publication, this customized dataset will be made public.
 
 ## Quick Start
 
-(1) To run pretrained YOLOv5x models to generate object detection, follow these steps:
+(1) To run pretrained YOLOv5x , YOLOv7 and YOLOv8 models to generate VRUs detection, follow these steps:
 
   Clone this repository into yolo_series_deepsort:
 
@@ -31,7 +33,7 @@ Upon publication, this customized dataset will be made public.
     pip install -r requirements.txt  # install all requirements
     ```
 
-This repository comprises of YOLOv5 , YOLOv7 and YOLOv8 models trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB.  By cloning this repo, uou will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
+  By cloning this repo, you will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
 
 
