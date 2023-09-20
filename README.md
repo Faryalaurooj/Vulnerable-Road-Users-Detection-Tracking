@@ -21,11 +21,19 @@ Upon publication, this customized dataset will be made public.
 
 ## Quick Start
 
-To run pretrained YOLOv5x models to generate object detection, follow these steps:
+(1) To run pretrained YOLOv5x models to generate object detection, follow these steps:
 
-Clone this repository into yolo_series_deepsort:
+  Clone this repository into yolo_series_deepsort:
 
-```
-git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
-cd yolo_series_deepsort ```
+    ```
+    git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
+    cd yolo_series_deepsort
+    pip install -r requirements.txt  # install all requirements
+    ```
+
+This repository comprises of YOLOv5 , YOLOv7 and YOLOv8 models trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB.  By cloning this repo, uou will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
+
+
+
+
 
