@@ -49,7 +49,7 @@ Preparation
 
 ## Requirements
 
-(1) If you have not done so already, clone this repository into yolo_series_deepsort:
+###(1) If you have not done so already, clone this repository into yolo_series_deepsort:
     
     
     
@@ -58,22 +58,37 @@ Preparation
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
     
-(2) Download and extract the Visdrone2019_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. visdrone.yaml file is also to be copied inside YOLOv5 folder.
+###(2) Download and extract the Visdrone2019_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. visdrone.yaml file is also to be copied inside YOLOv5 folder.
 
 i will provide the link very soon
 
-(3) Training
+###(3) Training
 
 To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one
 
 ```
 # Single-GPU
-python train.py --model yolov5s-cls.pt --data cifar100 --epochs 5 --img 224 --batch 128
+python train.py --model yolov5x-cls.pt --data cifar100 --epochs 5 --img 224 --batch 128
 
 # Multi-GPU DDP
 python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/train.py --model yolov5s-cls.pt --data imagenet --epochs 5 --img 224 --device 0,1,2,3
 ```
+### (4) Val
 
+Validate YOLOv5x-cls accuracy on dataset:
+
+```bash
+bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50000 images)
+python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --img 224  # validate
+```
+
+### (5) Predict
+
+Use pretrained YOLOv5x-cls.pt to predict bus.jpg:
+
+```bash
+python classify/predict.py --weights yolov5s-cls.pt --source data/images/bus.jpg
+```
   
 
 
