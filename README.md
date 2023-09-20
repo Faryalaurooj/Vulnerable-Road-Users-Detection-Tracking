@@ -9,18 +9,19 @@ VRUs include all live actors which can be hit by moving vehicles on roads and ar
 
 ## Dataset 
 
-VisDrone2019 dataset is downloaded which originally is in voc format and is labelled for 09 classes including pedestrians, people, cars, trucks, bicycles, etc. THis dataset has been reformatted and re-annotated for developing a specific dataset for this use case. The prepared data is in .txt format tand it can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks.
+For this project VisDrone2019 dataset is used as a baseline and a new customized dataset has been evolved specifically for VRUs which is in .txt format and can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks.
 
-This dataset is labelled for 03 classes namely :
-class 0-people(moving) and pedestrians(standing) both
+This dataset is labelled for 03 classes of VRUs namely :
+
+class 0-people(moving humans) and pedestrians(standing humans) both in one class
 class 1-tricycles and awning-tricycles
 class 2- Bicycles
 
-Upon publication, dataset will be made public 
+Upon publication, this customized dataset will be made public.
+
 ## Quick Start
 To run pretrained YOLOv5x models to generate object detection, follow these steps:
 Clone this repository into YOLO_DST:
 ``git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
-cd deepmask-pytorch
-DEEPMASK=$PWD
-export PYTHONPATH=$DEEPMASK:$PYTHONPATH
+  cd yolo_series_deepsort ``
+
