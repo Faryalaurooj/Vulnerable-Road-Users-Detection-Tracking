@@ -28,11 +28,11 @@ Upon publication, this customized dataset will be made public.
   Clone this repository into yolo_series_deepsort:
 
 
-    ```
+    
     git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
-    ```
+    
 
   By cloning this repo, you will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
@@ -53,11 +53,11 @@ Preparation
     
     
     
-    ```
+    
     git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
-    ```
+    
 
   
 
