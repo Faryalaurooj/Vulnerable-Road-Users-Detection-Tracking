@@ -25,6 +25,6 @@ To run pretrained YOLOv5x models to generate object detection, follow these step
 
 Clone this repository into YOLO_DST:
 
-``git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
+`` # git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
   cd yolo_series_deepsort ``
 
