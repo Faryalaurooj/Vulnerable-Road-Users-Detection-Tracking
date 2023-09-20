@@ -42,14 +42,14 @@ Upon publication, this customized dataset will be made public.
 ```
 ```
 
-# Training your own Model
+## Training your own Model
 
 To train your own YOLO models on this new custom dataset or any other dataset for VRU detection, follow these steps:
 Preparation
 
-## Requirements
 
-###(1) If you have not done so already, clone this repository into yolo_series_deepsort:
+
+### (1) If you have not done so already, clone this repository into yolo_series_deepsort:
     
     
     
@@ -58,11 +58,11 @@ Preparation
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
     
-###(2) Download and extract the Visdrone2019_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. visdrone.yaml file is also to be copied inside YOLOv5 folder.
+### (2) Download and extract the Visdrone2019_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. visdrone.yaml file is also to be copied inside YOLOv5 folder.
 
 i will provide the link very soon
 
-###(3) Training
+### (3) Training
 
 To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one
 
