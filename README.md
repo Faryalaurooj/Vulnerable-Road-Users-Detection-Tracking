@@ -58,6 +58,21 @@ Preparation
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
     
+(2) Download and extract the Visdrone2019_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. visdrone.yaml file is also to be copied inside YOLOv5 folder.
+
+i will provide the link very soon
+
+(3) Training
+
+To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one
+
+```
+# Single-GPU
+python classify/train.py --model yolov5s-cls.pt --data cifar100 --epochs 5 --img 224 --batch 128
+
+# Multi-GPU DDP
+python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/train.py --model yolov5s-cls.pt --data imagenet --epochs 5 --img 224 --device 0,1,2,3
+```
 
   
 
