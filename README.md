@@ -96,7 +96,7 @@ pip install -r requirements
 
 ### (2) Train
 
-In order to start training , first copy the VRU_Dataset folder and VRU.yaml file inside the yolov7 directory. Correct the path inside .yaml file by copying path of dataset and replacing it inside .yaml file. 
+In order to start training , first copy the VRU_Dataset folder and VRU.yaml file inside the yolov7 directory. Delete catch files from the labels folder inside dataset folder. Correct the path inside .yaml file by copying path of dataset and replacing it inside .yaml file. 
 Now run the command
 
 ```
@@ -106,6 +106,34 @@ python train.py --workers 8 --device 0,1 --batch-size 4 --data VRU.yaml --img 64
 so we are using two GPUs for training device 0 and 1 , you can change as per your machine, batch size 4 is good for my GPU memory needs you can adjust as per your machine. Dataset is referred by the link VRU.yaml , cfg refers to the initial dataset of yolov7s model on which it was trained through yolovx.yaml file , hyp refers to model type , weights are pre-trained so '' is enough here.
 
 If some interruption occurs and training stops, resume training by referring to last best possible weights by using following command
+```
+python train.py --workers 8 --device 0,1 --batch-size 4 --data VRU.yaml --img 640 640 --cfg cfg/training/yolov7x.yaml --weights 'runs/train/yolov710/weights/last.pt' --hyp data/hyp.scratch.p5.yaml
+```
+
+Here you can see that rest everything is same except for weight file where we will refer to the location of folder in which last weights were saved when training cycle disrupts. 
+So on my machine , when training starts it gives following details 
+
+Model Summary: 467 layers, 70828568 parameters, 70828568 gradients, 188.9 GFLOPS
+
+Scaled weight_decay = 0.0005
+Optimizer groups: 108 .bias, 108 conv.weight, 111 other
+train: Scanning 'VRU_Dataset/labels/train.cache' images and labels... 5772 found, 699 missing, 0 empty, 2 corrupted: 100%|███████████████████████████████████████████| 6471/6471 [00:00<?, ?it/s]
+val: Scanning 'VRU_Dataset/labels/validation.cache' images and labels... 535 found, 13 missing, 0 empty, 0 corrupted: 100%|████████████████████████████████████████████| 548/548 [00:00<?, ?it/s]
+
+autoanchor: Analyzing anchors... anchors/target = 1.79, Best Possible Recall (BPR) = 0.8191. Attempting to improve anchors, please wait...
+autoanchor: WARNING: Extremely small objects found. 20031 of 124506 labels are < 3 pixels in size.
+autoanchor: Running kmeans for 9 anchors on 124255 points...
+autoanchor: thr=0.25: 0.9994 best possible recall, 5.39 anchors past thr
+autoanchor: n=9, img_size=640, metric_all=0.356/0.750-mean/best, past_thr=0.499-mean: 3,5,  6,9,  8,15,  17,13,  11,22,  17,31,  33,23,  27,50,  63,53
+autoanchor: Evolving anchors with Genetic Algorithm: fitness = 0.7905: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 1000/1000 [00:01<00:00, 528.86it/s]
+autoanchor: thr=0.25: 0.9997 best possible recall, 6.96 anchors past thr
+autoanchor: n=9, img_size=640, metric_all=0.436/0.790-mean/best, past_thr=0.515-mean: 2,4,  3,8,  5,7,  5,12,  8,10,  8,18,  16,13,  13,25,  28,35
+autoanchor: New anchors saved to model. Update model *.yaml to use these anchors in the future.
+
+Image sizes 640 train, 640 test
+Using 4 dataloader workers
+Logging results to runs/train/yolov7
+Starting training for 300 epochs...
 
 
 ## YOLOv8x
