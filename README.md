@@ -199,6 +199,29 @@ tensorboard --logdir runs/detect/train7
 ```
 and see by ctrl+click  at http://localhost:6006/
 
+so when training staerted on my machine following information was displayed
+
+Model summary: 365 layers, 68155497 parameters, 68155481 gradients, 258.1 GFLOPs
+
+Transferred 589/595 items from pretrained weights
+TensorBoard: Start with 'tensorboard --logdir runs/detect/train7', view at http://localhost:6006/
+Freezing layer 'model.22.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks with YOLOv8n...
+Downloading https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt to 'yolov8n.pt'...
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6.23M/6.23M [00:00<00:00, 6.82MB/s]
+AMP: checks passed ✅
+train: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/train.cache... 5772 images, 699 backgrounds, 0 corrupt: 100%|██████████| 6471/6471 [00:00<?, ?it/s]
+train: WARNING ⚠️ /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/train/0000137_02220_d_0000163.jpg: 1 duplicate labels removed
+train: WARNING ⚠️ /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/train/9999987_00000_d_0000049.jpg: 1 duplicate labels removed
+val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/validation.cache... 535 images, 13 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
+Plotting labels to runs/detect/train7/labels.jpg... 
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: SGD(lr=0.01, momentum=0.9) with parameter groups 97 weight(decay=0.0), 104 weight(decay=0.0005), 103 bias(decay=0.0)
+Image sizes 640 train, 640 val
+Using 4 dataloader workers
+Logging results to runs/detect/train7
+Starting training for 300 epochs...
+
 
 ### (3) Testing
 Once training is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs
