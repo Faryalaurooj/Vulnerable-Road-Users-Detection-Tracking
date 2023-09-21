@@ -17,6 +17,12 @@ Class 0-people(moving humans) and pedestrians(standing humans) both in one class
 Class 1-tricycles and awning-tricycles
 Class 2- Bicycles
 
+Dataset is divided into three folders Train , Test , Validation , size of each is :
+
+Train : 6,471 images , 1.5 GB , each Image sizes 640 x 640
+Test  : 1,610 images , 311 MB , each Image sizes 640 x 640
+Val   : 548 images   , 81  MB , each Image sizes 640 x 640
+
 Upon publication, this customized VRU_Dataset will be made public.
 
 ## Quick Start
