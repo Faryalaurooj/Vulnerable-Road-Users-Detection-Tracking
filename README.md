@@ -90,7 +90,24 @@ In order to train YOLOv7x follow following instructions
 
 ```
 git clone https://github.com/WongKinYiu/yolov7.git
+cd yolov7
+pip install -r requirements
 ```
+
+### (2) Train
+
+In order to start training , first copy the VRU_Dataset folder and VRU.yaml file inside the yolov7 directory. Correct the path inside .yaml file by copying path of dataset and replacing it inside .yaml file. 
+Now run the command
+
+```
+python train.py --workers 8 --device 0,1 --batch-size 4 --data VRU.yaml --img 640 640 --cfg cfg/training/yolov7x.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+```
+
+so we are using two GPUs for training device 0 and 1 , you can change as per your machine, batch size 4 is good for my GPU memory needs you can adjust as per your machine. Dataset is referred by the link VRU.yaml , cfg refers to the initial dataset of yolov7s model on which it was trained through yolovx.yaml file , hyp refers to model type , weights are pre-trained so '' is enough here.
+
+If some interruption occurs and training stops, resume training by referring to last best possible weights by using following command
+
+
 ## YOLOv8x
 
 To train YOLOV8x model follow following instructions
