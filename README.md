@@ -30,7 +30,12 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
     pip install -r requirements.txt  # install all requirements
     
 
-  By cloning this repo, you will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
+  By cloning this repo, you will get the trained weights of the three models. THe results achieved for three models after training are displayed below:
+
+  ![Uploading YOLOv5x_results.png…]()
+
+  
+  You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
 
 ### (2) Running inference 
