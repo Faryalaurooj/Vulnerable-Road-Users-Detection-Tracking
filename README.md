@@ -71,11 +71,9 @@ i will provide the link very soon for dataset folder
 To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one
 
 ```
-# Single-GPU
+# 
 python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4
 
-# Multi-GPU DDP
-python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/train.py --model yolov5X.pt --data VRU_Dataset --epochs 300 --img 224 --device 0,1
 ```
 ### (4) Val
 
