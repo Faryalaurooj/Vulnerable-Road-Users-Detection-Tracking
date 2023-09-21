@@ -37,19 +37,20 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
     pip install -r requirements.txt  # install all requirements
     
 
-  By cloning this repo, you will get the trained weights of the three models. THe results achieved for three models after training are displayed below:
-
-  ![Uploading YOLOv5x_results.png…]()
-
-  
+  By cloning this repo, you will get the trained weights of the three models. The results achieved for three models after training are given in this repo
   You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
 
 ### (2) Running inference 
 
 ```
-```
+python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  # for detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training, for detection with yolov7x change the weights, place best.pt from the yolov7/runs/training/
 
+python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  
+```
+For detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training so copy this best.pt file from yolov5/runs/training
+
+for detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training 
 ## Training your own Model
 
 To train your own YOLO models on this new custom VRU_Dataset or any other new dataset for VRUs detection, follow these steps:
@@ -101,7 +102,10 @@ image 9/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Datase
 
 ...... so on for all images
 
-On average it gives 35msec inference time on a single image which means 28 FPS 
+Speed: 1.3ms pre-process, 41.1ms inference, 7.9ms NMS per image at shape (1, 3, 640, 640) which means 24 FPS
+Results saved to runs/detect/exp2
+
+
 ### (5) Validate 
 
 YOLOv5x-cls accuracy on dataset:
