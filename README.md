@@ -3,7 +3,8 @@
 This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. YOLOv5x , YOLOv7x and YOLOv8x models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies.
 
 VRUs include all live actors which can be hit by moving vehicles on roads and are prone to much larger damage as compared to other cars. 
-![train_batch0](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/07644322-113c-429b-a4b7-3f0cf9541dbb)
+![0000074_10218_d_0000020](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Detection-Tracking/assets/138756263/2de8e7e3-ae95-428c-a7fd-4754ff93ec64)
+
 ![val_batch0_pred](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/28ab2e28-649c-42ed-abee-41ee5c7f7c15)
 
 
@@ -75,9 +76,35 @@ To train YOLOv5x model on a GPU as i did, launch the train.py script. It contain
 python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4
 
 ```
-### (4) Val
+### (4) Testing / Inference 
+Copy the best.pt weights folder from training/runs folder into main yolov5 directory and then run following command
+```
+python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test
+```
+This command will run inference on all the images placed inside  test/VRU_Dataset folder and save the results inside runs/detect/exp folder with all detected classes.
+On my terminal when i ran this command , it appeared like this:
 
-Validate YOLOv5x-cls accuracy on dataset:
+detect: weights=['best.pt'], source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test, data=data/coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_csv=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False, vid_stride=1
+YOLOv5 🚀 v7.0-217-g8c45e51 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
+
+Fusing layers... 
+YOLOv5x summary: 322 layers, 86186872 parameters, 0 gradients, 203.8 GFLOPs
+image 1/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_00159_d_0000001.jpg: 384x640 6 peoples, 39.9ms
+image 2/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_00611_d_0000002.jpg: 384x640 12 peoples, 1 tricycle, 36.4ms
+image 3/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01111_d_0000003.jpg: 384x640 2 peoples, 41.9ms
+image 4/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01275_d_0000004.jpg: 384x640 2 peoples, 3 bicycles, 41.7ms
+image 5/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01659_d_0000004.jpg: 384x640 (no detections), 41.8ms
+image 6/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_02138_d_0000006.jpg: 384x640 (no detections), 41.8ms
+image 7/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_02616_d_0000007.jpg: 384x640 (no detections), 39.8ms
+image 8/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_03636_d_0000009.jpg: 384x640 (no detections), 30.1ms
+image 9/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_04050_d_0000010.jpg: 384x640 (no detections), 41.9ms
+
+...... so on for all images
+
+On average it gives 35msec inference time on a single image which means 28 FPS 
+### (5) Validate 
+
+YOLOv5x-cls accuracy on dataset:
 
 ```bash
 bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50000 images)
