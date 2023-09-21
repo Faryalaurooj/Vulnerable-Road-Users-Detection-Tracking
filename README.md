@@ -21,7 +21,9 @@ Class 2- Bicycles
 Dataset is divided into three folders Train , Test , Validation , size of each is :
 
 Train : 6,471 images , 1.5 GB , each Image sizes 640 x 640
+
 Test  : 1,610 images , 311 MB , each Image sizes 640 x 640
+
 Val   : 548 images   , 81  MB , each Image sizes 640 x 640
 
 Upon publication, this customized VRU_Dataset will be made public.
@@ -43,12 +45,13 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
 
 ### (2) Running inference 
 
-If you want to run inference with YOLO5x, copy the best.pt weights from yolov5/runs/training/last folder in the main folder ie yolov5 and then run following command
+If you want to run inference with YOLO5x, copy the best.pt weights from /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/runs/train/last folder in the main folder ie yolov5 and then run following command :
 ```
+cd /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  
 ```
-For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. same is true for YOLOv8x.
-
+For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. same is true for YOLOv8x. Also do not forget to cd in yolov7 or yolov8 directories respectively.cd
+To copy the complete path of any folder press ctrl+l+c 
 
 ## Training your own Model
 
@@ -77,7 +80,7 @@ python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --b
 
 ```
 ### (4) Testing / Inference 
-Copy the best.pt weights folder from training/runs folder into main yolov5 directory and then run following command
+Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command
 ```
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test
 ```
@@ -114,18 +117,12 @@ bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50
 python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --img 224  # validate
 ```
 
-### (5) Predict
 
-Use pretrained YOLOv5x-cls.pt to predict bus.jpg:
-
-```bash
-python classify/predict.py --weights yolov5s-cls.pt --source data/images/bus.jpg
-```
 ## YOLOv7x
 
 In order to train YOLOv7x follow following instructions
 
-### (1) Download repository 
+### (1) Download Repository 
 
 ```
 git clone https://github.com/WongKinYiu/yolov7.git
@@ -173,6 +170,39 @@ Image sizes 640 train, 640 test
 Using 4 dataloader workers
 Logging results to runs/train/yolov7
 Starting training for 300 epochs...
+
+### (3) Testing / Inference 
+Copy the last.pt weights folder from yolov7/train/runs folder into main yolov7 directory and then run following command
+```
+python detect.py --weights last.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov7/VRU_Dataset/images/test
+```
+This command will run inference on all the images placed inside  test/VRU_Dataset folder and save the results inside runs/detect/exp folder with all detected classes.
+On my terminal when i ran this command , it appeared like this:
+
+
+img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
+YOLOR 🚀 v0.1-126-g84932d7 torch 1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982.3125MB)
+                                             CUDA:1 (NVIDIA GeForce RTX 2080 SUPER, 7981.0MB)
+
+Fusing layers... 
+IDetect.fuse
+/home/caic/anaconda3/envs/yolo_ds1/lib/python3.9/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Model Summary: 362 layers, 70795920 parameters, 0 gradients, 188.0 GFLOPS
+ Convert model to Traced-model... 
+ traced_script_module saved! 
+ model is traced! 
+
+Done. (21.4ms) Inference, (4.5ms) NMS
+ The image with the result is saved in: runs/detect/exp/0000006_00159_d_0000001.jpg
+Done. (21.3ms) Inference, (4.6ms) NMS
+ The image with the result is saved in: runs/detect/exp/0000006_00611_d_0000002.jpg
+Done. (21.5ms) Inference, (4.5ms) NMS
+ The image with the result is saved in: runs/detect/exp/0000006_01111_d_0000003.jpg
+Done. (19.4ms) Inference, (4.5ms) NMS
+...... so on for 
+
+Done. (91.956s)
 
 
 ## YOLOv8x
