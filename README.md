@@ -7,27 +7,23 @@ VRUs include all live actors which can be hit by moving vehicles on roads and ar
 ![val_batch0_pred](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/28ab2e28-649c-42ed-abee-41ee5c7f7c15)
 
 
-## Requirements
+### Requirements
 
-## Dataset 
+### Dataset 
 
-For this project VisDrone2019 dataset is used as a baseline and a new customized dataset has been evolved specifically for VRUs which is in .txt format and can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks.
+For this project VisDrone2019 dataset is used as a baseline and a new customized dataset VRU_Dataset has been evolved specifically for VRUs (vulnerable road users) which is in .txt format and can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks. This dataset is labelled for 03 classes of VRUs namely :
 
-This dataset is labelled for 03 classes of VRUs namely :
+Class 0-people(moving humans) and pedestrians(standing humans) both in one class
+Class 1-tricycles and awning-tricycles
+Class 2- Bicycles
 
-class 0-people(moving humans) and pedestrians(standing humans) both in one class
-class 1-tricycles and awning-tricycles
-class 2- Bicycles
-
-Upon publication, this customized dataset will be made public.
+Upon publication, this customized VRU_Dataset will be made public.
 
 ## Quick Start
 
-(1) To run pretrained YOLOv5x , YOLOv7 and YOLOv8 models to generate VRUs detection, follow these steps:
+To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detections and tracking, follow these steps:
 
-  Clone this repository into yolo_series_deepsort:
-
-
+ ### (1) Clone this repository into yolo_series_deepsort:
     
     git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
     cd yolo_series_deepsort
@@ -37,31 +33,27 @@ Upon publication, this customized dataset will be made public.
   By cloning this repo, you will get the trained weights of the three models. You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
 
 
-(2) Running inference 
+### (2) Running inference 
 
 ```
 ```
 
 ## Training your own Model
 
-To train your own YOLO models on this new custom dataset e.g VRU_dataset or any other new dataset for VRU detection, follow these steps:
-
-Preparation
+To train your own YOLO models on this new custom VRU_Dataset or any other new dataset for VRUs detection, follow these steps:
 
 
 ## YOLOv5x
-### (1) If you have not done so already, clone this repository into yolo_series_deepsort:
+### (1) Clone repository into YOLOv5 folder:
     
-    
-    
-    
-    git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
-    cd yolo_series_deepsort
+         
+    git clone https://github.com/ultralytics/yolov5.git)
+    cd yolov5
     pip install -r requirements.txt  # install all requirements
     
-### (2) Download and extract the VRU_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. VRU.yaml file is also to be copied inside YOLOv5 folder.
+### (2) Download and extract the VRU_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. VRU.yaml file is also to be copied inside YOLOv5 folder. 
 
-i will provide the link very soon
+i will provide the link very soon for dataset folder
 
 ### (3) Training
 
@@ -69,10 +61,10 @@ To train YOLOv5x model on a GPU as i did, launch the train.py script. It contain
 
 ```
 # Single-GPU
-python train.py --model yolov5x-cls.pt --data cifar100 --epochs 5 --img 224 --batch 128
+python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4
 
 # Multi-GPU DDP
-python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/train.py --model yolov5s-cls.pt --data imagenet --epochs 5 --img 224 --device 0,1,2,3
+python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/train.py --model yolov5X.pt --data VRU_Dataset --epochs 300 --img 224 --device 0,1
 ```
 ### (4) Val
 
@@ -90,7 +82,15 @@ Use pretrained YOLOv5x-cls.pt to predict bus.jpg:
 ```bash
 python classify/predict.py --weights yolov5s-cls.pt --source data/images/bus.jpg
 ```
-  
+## YOLOv7x
+
+In order to train YOLOv7x follow following instructions
+
+### (1) Download repository 
+
+```
+git clone https://github.com/WongKinYiu/yolov7.git
+```
 ## YOLOv8x
 
 To train YOLOV8x model follow following instructions
