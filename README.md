@@ -43,14 +43,13 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
 
 ### (2) Running inference 
 
+If you want to run inference with YOLO5x, copy the best.pt weights from yolov5/runs/training/last folder in the main folder ie yolov5 and then run following command
 ```
-python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  # for detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training, for detection with yolov7x change the weights, place best.pt from the yolov7/runs/training/
-
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  
 ```
-For detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training so copy this best.pt file from yolov5/runs/training
+For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. same is true for YOLOv8x.
 
-for detection with trained YOLOv5x model, best.pt are the best weight of yolov5x training 
+
 ## Training your own Model
 
 To train your own YOLO models on this new custom VRU_Dataset or any other new dataset for VRUs detection, follow these steps:
