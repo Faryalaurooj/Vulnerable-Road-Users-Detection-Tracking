@@ -11,9 +11,13 @@ VRUs include all live actors which can be hit by moving vehicles on roads and ar
 ### Requirements
 
 Python-3.9.17 
+
 torch-1.13.1+cu117 
+
 CUDA:0 
+
 NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER 
+
 
 ### Dataset 
 
