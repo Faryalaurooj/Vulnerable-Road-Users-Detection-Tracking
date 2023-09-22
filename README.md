@@ -100,9 +100,8 @@ The VRU_DAtaset folder comprises of images and annotations in .txt format. The d
 To train YOLOv5 model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one:
 
 ```
-python train.py --data VRU.yaml --epochs 300 --img 640  --batch 4 --cfg  models /yolov5s.yaml --weights ''  --workers 8 --name yolov5  #for yolov5s
+python train.py --data VRU.yaml --epochs 300 --img 640  --batch 4 --cfg  models yolov5s.yaml --weights ''  --workers 8 --name yolov5  #for yolov5s # for yolov5x replace models with yolov5x.yaml only
 
-python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4                                               #for yolov5x
 
 ```
 When i run this command, my system shows this:
