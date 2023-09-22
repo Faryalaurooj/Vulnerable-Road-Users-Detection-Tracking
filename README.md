@@ -141,11 +141,6 @@ image 1/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Datase
 image 2/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_00611_d_0000002.jpg: 384x640 12 peoples, 1 tricycle, 36.4ms
 image 3/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01111_d_0000003.jpg: 384x640 2 peoples, 41.9ms
 image 4/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01275_d_0000004.jpg: 384x640 2 peoples, 3 bicycles, 41.7ms
-image 5/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_01659_d_0000004.jpg: 384x640 (no detections), 41.8ms
-image 6/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_02138_d_0000006.jpg: 384x640 (no detections), 41.8ms
-image 7/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_02616_d_0000007.jpg: 384x640 (no detections), 39.8ms
-image 8/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_03636_d_0000009.jpg: 384x640 (no detections), 30.1ms
-image 9/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_04050_d_0000010.jpg: 384x640 (no detections), 41.9ms
 
 ...... so on for all images
 
@@ -198,22 +193,35 @@ Model Summary: 467 layers, 70828568 parameters, 70828568 gradients, 188.9 GFLOPS
 
 Scaled weight_decay = 0.0005
 Optimizer groups: 108 .bias, 108 conv.weight, 111 other
+
 train: Scanning 'VRU_Dataset/labels/train.cache' images and labels... 5772 found, 699 missing, 0 empty, 2 corrupted: 100%|███████████████████████████████████████████| 6471/6471 [00:00<?, ?it/s]
+
 val: Scanning 'VRU_Dataset/labels/validation.cache' images and labels... 535 found, 13 missing, 0 empty, 0 corrupted: 100%|████████████████████████████████████████████| 548/548 [00:00<?, ?it/s]
 
 autoanchor: Analyzing anchors... anchors/target = 1.79, Best Possible Recall (BPR) = 0.8191. Attempting to improve anchors, please wait...
+
 autoanchor: WARNING: Extremely small objects found. 20031 of 124506 labels are < 3 pixels in size.
+
 autoanchor: Running kmeans for 9 anchors on 124255 points...
+
 autoanchor: thr=0.25: 0.9994 best possible recall, 5.39 anchors past thr
+
 autoanchor: n=9, img_size=640, metric_all=0.356/0.750-mean/best, past_thr=0.499-mean: 3,5,  6,9,  8,15,  17,13,  11,22,  17,31,  33,23,  27,50,  63,53
+
 autoanchor: Evolving anchors with Genetic Algorithm: fitness = 0.7905: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 1000/1000 [00:01<00:00, 528.86it/s]
+
 autoanchor: thr=0.25: 0.9997 best possible recall, 6.96 anchors past thr
+
 autoanchor: n=9, img_size=640, metric_all=0.436/0.790-mean/best, past_thr=0.515-mean: 2,4,  3,8,  5,7,  5,12,  8,10,  8,18,  16,13,  13,25,  28,35
+
 autoanchor: New anchors saved to model. Update model *.yaml to use these anchors in the future.
 
 Image sizes 640 train, 640 test
+
 Using 4 dataloader workers
+
 Logging results to runs/train/yolov7
+
 Starting training for 300 epochs...
 
 ### (3) Testing / Inference 
@@ -226,13 +234,13 @@ On my terminal when i ran this command , it appeared like this:
 
 
 img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
+
 YOLOR 🚀 v0.1-126-g84932d7 torch 1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982.3125MB)
+
                                              CUDA:1 (NVIDIA GeForce RTX 2080 SUPER, 7981.0MB)
 
 Fusing layers... 
-IDetect.fuse
-/home/caic/anaconda3/envs/yolo_ds1/lib/python3.9/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
-  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+ 
 Model Summary: 362 layers, 70795920 parameters, 0 gradients, 188.0 GFLOPS
  Convert model to Traced-model... 
  traced_script_module saved! 
