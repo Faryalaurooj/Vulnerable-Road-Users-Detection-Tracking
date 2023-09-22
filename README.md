@@ -97,13 +97,33 @@ The VRU_DAtaset folder comprises of images and annotations in .txt format. The d
 
 ### (3) Training
 
-To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one:
+To train YOLOv5 model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one:
 
 ```
+python train.py --data VRU.yaml --epochs 300 --img 640  --batch 4 --cfg  models /yolov5s.yaml --weights ''  --workers 8 --name yolov5  #for yolov5s
 
-python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4
+python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4                                               #for yolov5x
 
 ```
+When i run this command, my system shows this:
+
+hyperparameters: lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
+Comet: run 'pip install comet_ml' to automatically track and visualize YOLOv5 🚀 runs in Comet
+TensorBoard: Start with 'tensorboard --logdir runs/train', view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=3
+Plotting labels to runs/train/yolov5/labels.jpg... 
+Image sizes 640 train, 640 val
+Using 4 dataloader workers
+Logging results to runs/train/yolov5
+Starting training for 300 epochs...
+
+ Epoch    GPU_mem   box_loss   obj_loss   cls_loss  Instances       Size
+0/299     0.533G      0.147    0.04498    0.02542         73        640: 1
+          Class     Images  Instances          P          R      mAP50   
+         all        548      16833         0.00032     0.0037   0.000165   3.98e-05   .... so on for 300 epochs
+
+
+
 ### (4) Testing / Inference 
 Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command :
 
