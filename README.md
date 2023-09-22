@@ -74,39 +74,39 @@ If you want to run inference with YOLO5x, copy the best.pt weights from /home/ca
 cd /yolo_series_deepsort_pytorch/yolov5
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  #yolov5 command
 
+
 yolo task=detect mode=predict model=yolov8x.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test   #yolov8 command
 ```
-For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. same is true for YOLOv8x. Also do not forget to cd in yolov7 or yolov8 directories respectively.cd
-To copy the complete path of any folder press ctrl+l+c 
+For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. Same is true for YOLOv8x and YOLOv5 cases. Also do not forget to cd in yolov5 or yolov7 or yolov8 directories respectively before running inference command . To copy the complete path of any folder press ctrl+l+c .
 
 ## Training your own Model
 
-To train your own YOLO models on this new custom VRU_Dataset or any other new dataset for VRUs detection, follow these steps:
-
+If you do not want a quick start and want to train your own YOLO models on this new custom VRU_Dataset or any other new dataset for VRUs detection, follow these steps:
 
 ## YOLOv5x
 ### (1) Clone repository into YOLOv5 folder:
     
          
-    git clone https://github.com/ultralytics/yolov5.git)
+    git clone https://github.com/ultralytics/yolov5.git
     cd yolov5
     pip install -r requirements.txt  # install all requirements
     
-### (2) Download and extract the VRU_Dataset folder which comprises of images and annotations in .txt format: The data has to be copied inside YOLOv5 folder. VRU.yaml file is also to be copied inside YOLOv5 folder. 
+### (2) Download and extract the VRU_Dataset folder 
 
-i will provide the link very soon for dataset folder
+The VRU_DAtaset folder comprises of images and annotations in .txt format. The data has to be copied inside YOLOv5 folder. VRU.yaml file is also to be copied inside YOLOv5 folder. i will provide the link to dataset very soon. 
 
 ### (3) Training
 
-To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one
+To train YOLOv5x model on a GPU as i did, launch the train.py script. It contains several options, i recommend this one:
 
 ```
-# 
+
 python train.py --model yolov5x.pt --data VRU_Dataset --epochs 300 --img 224 --batch 4
 
 ```
 ### (4) Testing / Inference 
-Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command
+Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command :
+
 ```
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test
 ```
@@ -301,8 +301,6 @@ Downloading https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6.23M/6.23M [00:00<00:00, 6.82MB/s]
 AMP: checks passed ✅
 train: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/train.cache... 5772 images, 699 backgrounds, 0 corrupt: 100%|██████████| 6471/6471 [00:00<?, ?it/s]
-train: WARNING ⚠️ /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/train/0000137_02220_d_0000163.jpg: 1 duplicate labels removed
-train: WARNING ⚠️ /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/train/9999987_00000_d_0000049.jpg: 1 duplicate labels removed
 val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/validation.cache... 535 images, 13 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
 Plotting labels to runs/detect/train7/labels.jpg... 
 optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
@@ -335,7 +333,7 @@ Model summary (fused): 268 layers, 68126457 parameters, 0 gradients, 257.4 GFLOP
                 people        548      13969      0.701      0.534      0.589      0.272
               tricycle        548       1577      0.604      0.388      0.428      0.249
                bicycle        548       1287      0.385      0.234      0.213     0.0985
-Speed: 0.1ms preprocess, 9.9ms inference, 0.0ms loss, 4.2ms postprocess per image
+Speed: 0.1ms preprocess, 9.9ms inference = 101 FPS , 0.0ms loss, 4.2ms postprocess per image
 Results saved to runs/detect/train7
 
 ### (3) Testing
