@@ -71,7 +71,7 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
 
 If you want to run inference with YOLO5x, copy the best.pt weights from /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/runs/train/last folder in the main folder ie yolov5 and then run following command :
 ```
-cd /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5
+cd /yolo_series_deepsort_pytorch/yolov5
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  #yolov5 command
 
 yolo task=detect mode=predict model=yolov8x.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test   #yolov8 command
