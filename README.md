@@ -23,13 +23,13 @@ Therefore, i used various YOLO models in this project , compared their performan
 
 In order to perform this project following are the requirements
 
-Python-3.9.17 
+(a) Python-3.9.17 
 
-torch-1.13.1+cu117 
+(b) torch-1.13.1+cu117 
 
-CUDA:0 
+(c) CUDA:0 
 
-NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER   (# you can alternatively do the project on google collab with small changes in commands)
+(d) NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER   (# you can alternatively do the project on google collab with small changes in commands)
 
 
 ### Dataset 
