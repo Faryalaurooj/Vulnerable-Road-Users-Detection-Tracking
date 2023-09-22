@@ -10,6 +10,11 @@ VRUs include all live actors which can be hit by moving vehicles on roads and ar
 
 ### Requirements
 
+Python-3.9.17 
+torch-1.13.1+cu117 
+CUDA:0 
+NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER 
+
 ### Dataset 
 
 For this project VisDrone2019 dataset is used as a baseline and a new customized dataset VRU_Dataset has been evolved specifically for VRUs (vulnerable road users) which is in .txt format and can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks. This dataset is labelled for 03 classes of VRUs namely :
