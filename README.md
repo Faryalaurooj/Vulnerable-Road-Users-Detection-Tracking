@@ -294,10 +294,47 @@ Image sizes 640 train, 640 val
 Using 4 dataloader workers
 Logging results to runs/detect/train7
 Starting training for 300 epochs...
+.....
+.....
 
+  Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    176/300      5.64G      1.564     0.8106       0.85        162        640: 100%|██████████| 1618/1618 [05:16<00:00,  5.11it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 69/69 [00:06<00:00, 11.35it/s]
+                   all        548      16833      0.576      0.389      0.417       0.21
+
+My system Stopped training early as no improvement observed in last 50 epochs. Best results observed at epoch 126, best model saved as best.pt.
+To update EarlyStopping(patience=50) pass a new patience value, i.e. `patience=300` or use `patience=0` to disable EarlyStopping.
+
+176 epochs completed in 15.831 hours.
+Optimizer stripped from runs/detect/train7/weights/last.pt, 136.7MB
+Optimizer stripped from runs/detect/train7/weights/best.pt, 136.7MB
+
+Validating runs/detect/train7/weights/best.pt...
+Ultralytics YOLOv8.0.176 🚀 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
+Model summary (fused): 268 layers, 68126457 parameters, 0 gradients, 257.4 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   1%|▏         | 1/69 [00:00<00:10,  6.79it/s]WARNING ⚠️ NMS time limit 0.900s exceeded
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 69/69 [00:09<00:00,  7.07it/s]
+                   all        548      16833      0.563      0.385       0.41      0.207
+                people        548      13969      0.701      0.534      0.589      0.272
+              tricycle        548       1577      0.604      0.388      0.428      0.249
+               bicycle        548       1287      0.385      0.234      0.213     0.0985
+Speed: 0.1ms preprocess, 9.9ms inference, 0.0ms loss, 4.2ms postprocess per image
+Results saved to runs/detect/train7
 
 ### (3) Testing
-Once training is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs
+Once training is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs. First copy  the best.pt weights from runs/detect/train7 folder into main yolov8 directory and then run this command:
+
+```
+yolo task=detect mode=predict model=yolov8x.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test
+
+```
+It will run prediction / testing on all the images inside VRU_Dataset/images/test folder. You can do testing on any other set of images as well by placing that folder inside yolov8 directory.
+After completion of testing on images (1610 total) , it shows me these results :
+
+Speed: 1.3ms preprocess, 20.4ms inference, 0.7ms postprocess per image at shape (1, 3, 480, 640)
+Results saved to runs/detect/predict
+
+
 
 
 
