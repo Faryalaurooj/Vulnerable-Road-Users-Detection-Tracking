@@ -7,18 +7,21 @@ VRUs include all live actors which can be hit by moving vehicles on roads and ar
 
 ![val_batch0_pred](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/28ab2e28-649c-42ed-abee-41ee5c7f7c15)
 
-YOLO is state-of-the-art object detection algorithm which is popularly used in computer cision for object detection tasks. Some of the reasons why YOLO is leading the competition include its:
+YOLO is state-of-the-art object detection algorithm which is popularly used in computer cision for object detection tasks. Some of the reasons why YOLO is leading the competition and  include:
 
-    Speed 
+(a) Speed 
     
-    Detection accuracy 
+(b) Detection accuracy 
     
-    Good generalization 
+(c) Good generalization 
     
-    Open-source
+(d) Open-source
     
+Therefore, i used various YOLO models in this project , compared their performances and in the end propose fastest, most accurate model for this application. 
 
 ### Requirements
+
+In order to perform this project following are the requirements
 
 Python-3.9.17 
 
@@ -26,7 +29,7 @@ torch-1.13.1+cu117
 
 CUDA:0 
 
-NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER 
+NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER   (# you can alternatively do the project on google collab with small changes in commands)
 
 
 ### Dataset 
