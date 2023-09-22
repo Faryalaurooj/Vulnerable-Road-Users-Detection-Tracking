@@ -36,17 +36,19 @@ NVIDIA GeForce RTX 2080 SUPER, 7982MiB OR HIGHER   (# you can alternatively do t
 
 For this project VisDrone2019 dataset is used as a baseline and a new customized dataset VRU_Dataset has been evolved specifically for VRUs (vulnerable road users) which is in .txt format and can be used to train cutting-edge, state-of-the-art (SOTA) models like YOLO models for object detection tasks. This dataset is labelled for 03 classes of VRUs namely :
 
-Class 0-people(moving humans) and pedestrians(standing humans) both in one class
-Class 1-tricycles and awning-tricycles
-Class 2- Bicycles
+(a) Class 0- People(moving humans) and Pedestrians(standing humans) both in one class
+
+(b) Class 1- Tricycles and Awning-tricycles
+
+(c) Class 2- Bicycles
 
 Dataset is divided into three folders Train , Test , Validation , size of each is :
 
-Train : 6,471 images , 1.5 GB , each Image sizes 640 x 640
+(a) Train : 6,471 images , 1.5 GB , each Image sizes 640 x 640
 
-Test  : 1,610 images , 311 MB , each Image sizes 640 x 640
+(b) Test  : 1,610 images , 311 MB , each Image sizes 640 x 640
 
-Val   : 548 images   , 81  MB , each Image sizes 640 x 640
+(c) Val   : 548 images   , 81  MB , each Image sizes 640 x 640
 
 Upon publication, this customized VRU_Dataset will be made public.
 
