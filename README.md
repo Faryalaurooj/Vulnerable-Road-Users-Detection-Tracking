@@ -1,12 +1,22 @@
 # Vulnerable-Road-Users-Detection_Tracking
 
-This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. YOLOv5x , YOLOv7x and YOLOv8x models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies.
+This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. YOLOv5x , YOLOv7x and YOLOv8x models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies. 
 
 VRUs include all live actors which can be hit by moving vehicles on roads and are prone to much larger damage as compared to other cars. 
 ![0000074_10218_d_0000020](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Detection-Tracking/assets/138756263/2de8e7e3-ae95-428c-a7fd-4754ff93ec64)
 
 ![val_batch0_pred](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset/assets/138756263/28ab2e28-649c-42ed-abee-41ee5c7f7c15)
 
+YOLO is state-of-the-art object detection algorithm which is popularly used in computer cision for object detection tasks. Some of the reasons why YOLO is leading the competition include its:
+
+    Speed 
+    
+    Detection accuracy 
+    
+    Good generalization 
+    
+    Open-source
+    
 
 ### Requirements
 
@@ -46,7 +56,7 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
     git clone https://github.com/Faryalaurooj/Vulnerable-Road-Users-Dataset.git
     cd yolo_series_deepsort
     pip install -r requirements.txt  # install all requirements
-    
+    pip install ultralytics          # install for running YOLOv8
 
   By cloning this repo, you will get the trained weights of the three models. The results achieved for three models after training are given in this repo
   You can then use these trained models for testing and inference on images of VRUs avaiable in test folder 
@@ -57,7 +67,9 @@ To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detectio
 If you want to run inference with YOLO5x, copy the best.pt weights from /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/runs/train/last folder in the main folder ie yolov5 and then run following command :
 ```
 cd /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5
-python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  
+python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test  #yolov5 command
+
+yolo task=detect mode=predict model=yolov8x.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test   #yolov8 command
 ```
 For detection with trained YOLOv7x model, best.pt are the best weight of yolov7x training so copy that best.pt file from yolov7/runs/training/last folder into main folder i.e yolov7 and then run above command. same is true for YOLOv8x. Also do not forget to cd in yolov7 or yolov8 directories respectively.cd
 To copy the complete path of any folder press ctrl+l+c 
