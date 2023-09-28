@@ -104,9 +104,11 @@ python train.py --data VRU.yaml --epochs 300 --img 640  --batch 4 --cfg  ./model
 
 
 ```
-for yolov5s and for yolov5x replace models with yolov5x.yaml only
+
+Start training for YOLOv5s now
 When i run this command, my system shows this:
 
+YOLOv5s summary: 214 layers, 7027720 parameters, 7027720 gradients, 16.0 GFLOPs
 hyperparameters: lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
 Comet: run 'pip install comet_ml' to automatically track and visualize YOLOv5 🚀 runs in Comet
 TensorBoard: Start with 'tensorboard --logdir runs/train', view at http://localhost:6006/
@@ -122,6 +124,22 @@ Starting training for 300 epochs...
           Class     Images  Instances          P          R      mAP50   
          all        548      16833         0.00032     0.0037   0.000165   3.98e-05   .... so on for 300 epochs
 
+......
+
+300 epochs completed in 16.620 hours.
+Optimizer stripped from runs/train/yolov52/weights/last.pt, 14.3MB
+Optimizer stripped from runs/train/yolov52/weights/best.pt, 14.3MB
+
+Validating runs/train/yolov52/weights/best.pt...
+Fusing layers... 
+YOLOv5s summary: 157 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 69/69 [00:07<00:00,  9.19it/s]
+                   all        548      16833      0.455      0.292      0.292      0.117
+                people        548      13969      0.562      0.521      0.526       0.21
+              tricycle        548       1577      0.492      0.217      0.235      0.103
+               bicycle        548       1287      0.312      0.139      0.116     0.0366
+Results saved to runs/train/yolov52
+for yolov5x replace models with yolov5x.yaml only
 
 
 ### (4) Testing / Inference 
@@ -131,6 +149,8 @@ Copy the best.pt weights folder from train/runs folder into main yolov5 director
 python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test
 ```
 This command will run inference on all the images placed inside  test/VRU_Dataset folder and save the results inside runs/detect/exp folder with all detected classes.
+
+First detection with YOLOv5x model :
 On my terminal when i ran this command , it appeared like this:
 
 detect: weights=['best.pt'], source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test, data=data/coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_csv=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False, vid_stride=1
@@ -148,6 +168,18 @@ image 4/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Datase
 Speed: 1.3ms pre-process, 41.1ms inference, 7.9ms NMS per image at shape (1, 3, 640, 640) which means 24 FPS
 Results saved to runs/detect/exp2
 
+then i run the same command by using best.pt weights of YOLOv5s , copying the best.pt folder into main yolov5 directory and running above command. i get this ; 
+
+using layers... 
+YOLOv5s summary: 157 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
+image 1/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/0000006_00159_d_0000001.jpg: 384x640 5 peoples, 8.5ms
+......
+image 1610/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test/9999996_00000_d_0000029.jpg: 480x640 7 peoples, 5.6ms
+
+Speed: 0.2ms pre-process, 5.7ms inference, 0.5ms NMS per image at shape (1, 3, 640, 640) , 175 FPS
+Results saved to runs/detect/exp5
+
+so we can observe pre-process speed and inference time is improved in case of yolov5s as compared to yolov5x but overall P curve R curve are infererioir 
 
 ### (5) Validate 
 
@@ -159,7 +191,7 @@ python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --im
 ```
 
 
-## YOLOv7x
+## YOLOv7
 
 In order to train YOLOv7x follow following instructions
 
@@ -177,7 +209,8 @@ In order to start training , first copy the VRU_Dataset folder and VRU.yaml file
 Now run the command
 
 ```
-python train.py --workers 8 --device 0,1 --batch-size 4 --data VRU.yaml --img 640 640 --cfg cfg/training/yolov7x.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+logdir runs/train
+
 ```
 
 so we are using two GPUs for training device 0 and 1 , you can change as per your machine, batch size 4 is good for my GPU memory needs you can adjust as per your machine. Dataset is referred by the link VRU.yaml , cfg refers to the initial dataset of yolov7s model on which it was trained through yolovx.yaml file , hyp refers to model type , weights are pre-trained so '' is enough here.
@@ -309,7 +342,7 @@ Now we are ready to run training command
 ```
 yolo task=detect mode=train model=yolov8x.pt data=VRU.yaml epochs=300 imgsz=640 batch=4
 ```
-so we have defined model as YOLOv8x , custom data whose path is defined inside VRU.yaml file , if you want to use some other data you can change this file and give that path in .yaml file , we have defined batch size as 4 to meet GPU memory requirements.
+so we have defined model as ##YOLOv8x , custom data whose path is defined inside VRU.yaml file , if you want to use some other data you can change this file and give that path in .yaml file , we have defined batch size as 4 to meet GPU memory requirements.
 During training, we can see the precision, recall and mAP values on scree with help of tensorboard with following command
 
 ```
@@ -317,10 +350,9 @@ tensorboard --logdir runs/detect/train7
 ```
 and see by ctrl+click  at http://localhost:6006/
 
-so when training staerted on my machine following information was displayed
+so when training staerted on my machine following information was displayed:
 
 Model summary: 365 layers, 68155497 parameters, 68155481 gradients, 258.1 GFLOPs
-
 Transferred 589/595 items from pretrained weights
 TensorBoard: Start with 'tensorboard --logdir runs/detect/train7', view at http://localhost:6006/
 Freezing layer 'model.22.dfl.conv.weight'
@@ -364,18 +396,45 @@ Model summary (fused): 268 layers, 68126457 parameters, 0 gradients, 257.4 GFLOP
 Speed: 0.1ms preprocess, 9.9ms inference = 101 FPS , 0.0ms loss, 4.2ms postprocess per image
 Results saved to runs/detect/train7
 
+Lets run the train command for YOLOv8s model also, by only changing yolov8x.pt with yolov8s.pt. When we run this command, first of all system will automatically download the weights from internet and then displays this:
+
+Model summary: 225 layers, 11136761 parameters, 11136745 gradients, 28.7 GFLOPs
+Transferred 349/355 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+300 epochs completed in 8.675 hours.
+Optimizer stripped from runs/detect/train8/weights/last.pt, 22.5MB
+Optimizer stripped from runs/detect/train8/weights/best.pt, 22.5MB
+
+Validating runs/detect/train8/weights/best.pt...
+Ultralytics YOLOv8.0.176 🚀 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
+Model summary (fused): 168 layers, 11126745 parameters, 0 gradients, 28.4 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 69/69 [00:06<00:00, 10.90it/s]
+                   all        548      16833      0.508      0.335      0.357      0.168
+                people        548      13969      0.664        0.5      0.556      0.244
+              tricycle        548       1577      0.553      0.328      0.362      0.195
+               bicycle        548       1287      0.309      0.177      0.155     0.0635
+Speed: 0.1ms preprocess, 1.6ms inference, 0.0ms loss, 0.5ms postprocess per image, 625 FPS
+
+
+
+
 ### (3) Testing
 Once training is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs. First copy  the best.pt weights from runs/detect/train7 folder into main yolov8 directory and then run this command:
 
 ```
-yolo task=detect mode=predict model=yolov8x.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test
+yolo task=detect mode=predict model=best.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test
 
 ```
 It will run prediction / testing on all the images inside VRU_Dataset/images/test folder. You can do testing on any other set of images as well by placing that folder inside yolov8 directory.
 After completion of testing on images (1610 total) , it shows me these results :
 
-Speed: 1.3ms preprocess, 20.4ms inference, 0.7ms postprocess per image at shape (1, 3, 480, 640)
-Results saved to runs/detect/predict
+Ultralytics YOLOv8.0.176 🚀 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
+Model summary (fused): 268 layers, 68126457 parameters, 0 gradients, 257.4 GFLOPs
+image 1/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test/0000006_00159_d_0000001.jpg: 384x640 4 peoples, 22.2ms
+.......
+image 1610/1610 /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test/9999996_00000_d_0000029.jpg: 480x640 7 peoples, 24.5ms
+Speed: 1.3ms preprocess, 20.1ms inference, 0.7ms postprocess per image at shape (1, 3, 480, 640)
+Results saved to runs/detect/predict2
 
 
 
