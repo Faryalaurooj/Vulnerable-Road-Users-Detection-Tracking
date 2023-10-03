@@ -1,6 +1,6 @@
 # Vulnerable-Road-Users-Detection_Tracking
 
-This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 DeepSORT (DST) for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. YOLOv5x , YOLOv7x and YOLOv8x models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies. 
+This repository contains a deep learning approach based on YOLOv5 , YOLOv7 and YOLOv8 for detection and tracking of Vulnerable road users (VRUs) for faciliatating self driving vehicles and assiting human drivers for safety of VRUs. Results have been compared for benchmarking. Models are trained on a NVIDIA GeForce RTX 2080 SUPER, 7982.312 MB after installing all dependencies. 
 
 VRUs include all live actors which can be hit by moving vehicles on roads and are prone to much larger damage as compared to other cars. 
 ![0000074_10218_d_0000020](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Detection-Tracking/assets/138756263/2de8e7e3-ae95-428c-a7fd-4754ff93ec64)
@@ -17,7 +17,9 @@ YOLO is state-of-the-art object detection algorithm which is popularly used in c
     
 (d) Open-source
     
-Therefore, i used various YOLO models in this project , compared their performances and in the end propose fastest, most accurate model for this application. 
+Therefore, i used various YOLO models in this project , compared their performances and in the end propose fastest, most accurate model for this application. At end of this project, i found that in terms of accuracy mAP YOLOv8x surpasses others and in terms of speed (FPS) YOLOv8s is best and YOLOv8x is second choice. Overall on GPU, YOLOv8 is best then comes YOLOv5 in terms of accuracy and speed both. YOLOv7 showed minimum mAP in this case study.
+
+
 
 ### Requirements
 
@@ -54,7 +56,7 @@ Upon publication, this customized VRU_Dataset will be made public.
 
 ## Quick Start
 
-To run pretrained YOLOv5x , YOLOv7x and YOLOv8x models to generate VRUs detections and tracking, follow these steps:
+To run pretrained YOLOv5x and YOLOv8x models to generate VRUs detections and tracking, follow these steps:
 
  ### (1) Clone this repository into yolo_series_deepsort:
     
@@ -237,11 +239,11 @@ In order to start training , first copy the VRU_Dataset folder and VRU.yaml file
 Now run the command
 
 ```
-logdir runs/train
+python train.py --workers 8 --device 0,1 --batch-size 4 --data VRU.yaml --img 640 640 --cfg cfg/training/yolov7x.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
 
 ```
 
-so we are using two GPUs for training device 0 and 1 , you can change as per your machine, batch size 4 is good for my GPU memory needs you can adjust as per your machine. Dataset is referred by the link VRU.yaml , cfg refers to the initial dataset of yolov7s model on which it was trained through yolovx.yaml file , hyp refers to model type , weights are pre-trained so '' is enough here.
+so we are using two GPUs for training device 0 and 1 , you can change as per your machine, batch size 4 is good for my GPU memory needs, you can adjust as per your machine. Dataset is referred by the link VRU.yaml , cfg refers to the initial dataset of yolov7X model on which it was trained through yolov7x.yaml file , hyp refers to model type , weights are pre-trained so '' is enough here IT MEANS IT WILL AUTOMATICALLY DOWNLOAD THE WEIGHTS FROM INTERNET AND THEN IT WILL START TRAINING ITSELF AND ON COMPLETION OF TRAINING IT WILL GENERATE ITS OWN BEST.PT FILE WHICH WILL BE NEW WEIGHTS.
 
 If some interruption occurs and training stops, resume training by referring to last best possible weights by using following command
 ```
@@ -287,9 +289,9 @@ Logging results to runs/train/yolov7
 Starting training for 300 epochs...
 
 ### (3) Testing / Inference 
-Copy the last.pt weights folder from yolov7/train/runs folder into main yolov7 directory and then run following command
+Copy the best.pt weights folder from yolov7/runs/train/yolov711 folder into main yolov7 directory and then run following command
 ```
-python detect.py --weights last.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov7/VRU_Dataset/images/test
+python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov7/VRU_Dataset/images/test
 ```
 This command will run inference on all the images placed inside  test/VRU_Dataset folder and save the results inside runs/detect/exp folder with all detected classes.
 On my terminal when i ran this command , it appeared like this:
@@ -316,9 +318,18 @@ Done. (21.5ms) Inference, (4.5ms) NMS
  The image with the result is saved in: runs/detect/exp/0000006_01111_d_0000003.jpg
 Done. (19.4ms) Inference, (4.5ms) NMS
 ...... so on for 
-
 Done. (91.956s)
 
+in another attempt 
+
+Fusing layers... 
+Model Summary: 362 layers, 70795920 parameters, 0 gradients, 188.0 GFLOPS
+Done. (11.5ms) Inference, (0.2ms) NMS
+The image with the result is saved in: runs/detect/exp3/0000006_00159_d_0000001.jpg
+......
+Done. (13.0ms) Inference, (0.1ms) NMS
+The image with the result is saved in: runs/detect/exp3/9999996_00000_d_0000029.jpg
+Done. (68.661s)
 
 ## YOLOv8x
 
