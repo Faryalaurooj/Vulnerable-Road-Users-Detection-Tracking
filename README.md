@@ -141,8 +141,44 @@ YOLOv5s summary: 157 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
 Results saved to runs/train/yolov52
 for yolov5x replace models with yolov5x.yaml only
 
+### (4) Validate 
 
-### (4) Testing / Inference 
+When the training is over, it is good practice to validate the new model on images it has not seen before. Therefore, when creating a dataset, we divide it into three parts, and one of them that we will use now as a validation dataset.
+
+
+Running for YOLOv5s trained weights by copying yolov5s best.pt weights into yolov5 main directory:
+
+```
+python val.py --data VRU.yaml -weights best.pt --img 640 --conf 0.001 --iou 0.65 
+```
+ when i run this command following results appear
+
+Fusing layers... 
+YOLOv5s summary: 157 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
+val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/Visdrone2
+                 Class     Images  Instances          P          R      mAP50   
+                   all        548      16833      0.441      0.287      0.288      0.117
+                people        548      13969      0.546      0.522      0.522      0.212
+              tricycle        548       1577      0.485      0.212      0.228      0.102
+               bicycle        548       1287      0.291      0.127      0.112     0.0365
+Speed: 0.1ms pre-process, 5.8ms inference, 2.2ms NMS per image at shape (32, 3, 640, 640)
+Results saved to runs/val/exp2
+
+When we want to run validation with yolov5x , we will copy those best.pt weights in main yolov5 directory before running above command , as i did and got following results:
+
+Fusing layers... 
+YOLOv5x summary: 322 layers, 86186872 parameters, 0 gradients, 203.8 GFLOPs
+val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/Visdrone2
+                 Class     Images  Instances          P          R      mAP50   
+                   all        548      16833      0.554      0.335       0.35      0.154
+                people        548      13969      0.622      0.558       0.58      0.252
+              tricycle        548       1577      0.632      0.274      0.299      0.147
+               bicycle        548       1287      0.406      0.172      0.172     0.0638
+Speed: 0.1ms pre-process, 17.0ms inference, 1.5ms NMS per image at shape (32, 3, 640, 640)
+Results saved to runs/val/exp3
+
+
+### (5) Testing / Inference 
 Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command :
 
 ```
@@ -181,14 +217,6 @@ Results saved to runs/detect/exp5
 
 so we can observe pre-process speed and inference time is improved in case of yolov5s as compared to yolov5x but overall P curve R curve are infererioir 
 
-### (5) Validate 
-
-YOLOv5x-cls accuracy on dataset:
-
-```bash
-bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50000 images)
-python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --img 224  # validate
-```
 
 
 ## YOLOv7
