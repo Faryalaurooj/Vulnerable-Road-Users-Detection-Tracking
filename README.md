@@ -262,31 +262,10 @@ train: Scanning 'VRU_Dataset/labels/train.cache' images and labels... 5772 found
 
 val: Scanning 'VRU_Dataset/labels/validation.cache' images and labels... 535 found, 13 missing, 0 empty, 0 corrupted: 100%|████████████████████████████████████████████| 548/548 [00:00<?, ?it/s]
 
-autoanchor: Analyzing anchors... anchors/target = 1.79, Best Possible Recall (BPR) = 0.8191. Attempting to improve anchors, please wait...
-
-autoanchor: WARNING: Extremely small objects found. 20031 of 124506 labels are < 3 pixels in size.
-
-autoanchor: Running kmeans for 9 anchors on 124255 points...
-
-autoanchor: thr=0.25: 0.9994 best possible recall, 5.39 anchors past thr
-
-autoanchor: n=9, img_size=640, metric_all=0.356/0.750-mean/best, past_thr=0.499-mean: 3,5,  6,9,  8,15,  17,13,  11,22,  17,31,  33,23,  27,50,  63,53
-
-autoanchor: Evolving anchors with Genetic Algorithm: fitness = 0.7905: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 1000/1000 [00:01<00:00, 528.86it/s]
-
-autoanchor: thr=0.25: 0.9997 best possible recall, 6.96 anchors past thr
-
-autoanchor: n=9, img_size=640, metric_all=0.436/0.790-mean/best, past_thr=0.515-mean: 2,4,  3,8,  5,7,  5,12,  8,10,  8,18,  16,13,  13,25,  28,35
-
-autoanchor: New anchors saved to model. Update model *.yaml to use these anchors in the future.
-
-Image sizes 640 train, 640 test
-
-Using 4 dataloader workers
-
-Logging results to runs/train/yolov7
+Logging results to runs/train/yolov711
 
 Starting training for 300 epochs...
+
 
 ### (3) Testing / Inference 
 Copy the best.pt weights folder from yolov7/runs/train/yolov711 folder into main yolov7 directory and then run following command
@@ -343,7 +322,7 @@ cd yolov8
 pip install -r requirements
 pip install ultralytics
 ```
-Now copy the VRU_DATASET folder inside yolov8 folder and delete catch files from the labels folder. Also copy the VRU.yaml file inside yolov8 directory. THe .yaml file should appear like this 
+Now copy the VRU_DATASET folder inside yolov8 folder and delete cache  files from the labels folder. Also copy the VRU.yaml file inside yolov8 directory. THe .yaml file should appear like this 
 
 
 train: VRU_Dataset/images/train  # train images (relative to 'path')  6471 images
@@ -397,18 +376,6 @@ TensorBoard: Start with 'tensorboard --logdir runs/detect/train7', view at http:
 Freezing layer 'model.22.dfl.conv.weight'
 AMP: running Automatic Mixed Precision (AMP) checks with YOLOv8n...
 Downloading https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt to 'yolov8n.pt'...
-100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6.23M/6.23M [00:00<00:00, 6.82MB/s]
-AMP: checks passed ✅
-train: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/train.cache... 5772 images, 699 backgrounds, 0 corrupt: 100%|██████████| 6471/6471 [00:00<?, ?it/s]
-val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/validation.cache... 535 images, 13 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
-Plotting labels to runs/detect/train7/labels.jpg... 
-optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
-optimizer: SGD(lr=0.01, momentum=0.9) with parameter groups 97 weight(decay=0.0), 104 weight(decay=0.0005), 103 bias(decay=0.0)
-Image sizes 640 train, 640 val
-Using 4 dataloader workers
-Logging results to runs/detect/train7
-Starting training for 300 epochs...
-.....
 .....
 
   Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
@@ -441,8 +408,6 @@ Model summary: 225 layers, 11136761 parameters, 11136745 gradients, 28.7 GFLOPs
 Transferred 349/355 items from pretrained weights
 Freezing layer 'model.22.dfl.conv.weight'
 300 epochs completed in 8.675 hours.
-Optimizer stripped from runs/detect/train8/weights/last.pt, 22.5MB
-Optimizer stripped from runs/detect/train8/weights/best.pt, 22.5MB
 
 Validating runs/detect/train8/weights/best.pt...
 Ultralytics YOLOv8.0.176 🚀 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
@@ -454,11 +419,29 @@ Model summary (fused): 168 layers, 11126745 parameters, 0 gradients, 28.4 GFLOPs
                bicycle        548       1287      0.309      0.177      0.155     0.0635
 Speed: 0.1ms preprocess, 1.6ms inference, 0.0ms loss, 0.5ms postprocess per image, 625 FPS
 
+### (3) Validation
+
+When the training is over, it is good practice to validate the new model on images it has not seen before.In order to perfrom validation with YOLOv8 , copy the best.pt weights in main yolov8 directory and then perfrom this command: 
+```
+yolo task=detect mode=val model=best.pt data=VRU.yaml
+```
+when i run this command i get this result
+
+Ultralytics YOLOv8.0.146 🚀 Python-3.9.17 torch-1.13.1+cu117 CUDA:0 (NVIDIA GeForce RTX 2080 SUPER, 7982MiB)
+Model summary (fused): 268 layers, 68126457 parameters, 0 gradients, 257.4 GFLOPs
+val: Scanning /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/validation... 535 images, 13 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<00:00, 714.90it/s]
+val: New cache created: /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/labels/validation.cache
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 35/35 [00:15<00:00,  2.26it/s]
+                   all        548      16833      0.573      0.396      0.426      0.217
+                people        548      13969      0.704      0.551      0.608      0.286
+              tricycle        548       1577      0.597      0.403      0.442      0.258
+               bicycle        548       1287      0.419      0.235      0.228      0.106
+Speed: 0.3ms preprocess, 20.8ms inference, 0.0ms loss, 1.3ms postprocess per image
+Results saved to runs/detect/val
 
 
-
-### (3) Testing
-Once training is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs. First copy  the best.pt weights from runs/detect/train7 folder into main yolov8 directory and then run this command:
+### (4) Testing
+Once training and validation is complete , we can test the trained YOLOv8x model for VRU detection from test folder of images from VRU_dataset folder or on any other images containing VRUs. First copy  the best.pt weights from runs/detect/train7 folder into main yolov8 directory and then run this command:
 
 ```
 yolo task=detect mode=predict model=best.pt source=/home/caic/Downloads/yolo_series_deepsort_pytorch/yolov8/VRU_Dataset/images/test
