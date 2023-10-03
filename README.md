@@ -19,6 +19,7 @@ YOLO is state-of-the-art object detection algorithm which is popularly used in c
     
 Therefore, i used various YOLO models in this project , compared their performances and in the end propose fastest, most accurate model for this application. At end of this project, i found that in terms of accuracy mAP YOLOv8x surpasses others and in terms of speed (FPS) YOLOv8s is best and YOLOv8x is second choice. Overall on GPU, YOLOv8 is best then comes YOLOv5 in terms of accuracy and speed both. YOLOv7 showed minimum mAP in this case study.
 
+[detection_results_comparison.ods](https://github.com/Faryalaurooj/Vulnerable-Road-Users-Detection-Tracking/files/12791634/detection_results_comparison.ods)
 
 
 ### Requirements
