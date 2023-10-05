@@ -185,7 +185,7 @@ Results saved to runs/val/exp3
 Copy the best.pt weights folder from train/runs folder into main yolov5 directory and then run following command :
 
 ```
-python detect.py --weights best.pt --source /home/caic/Downloads/yolo_series_deepsort_pytorch/yolov5/VRU_Dataset/images/test
+python detect.py --weights best.pt --source ./VRU_Dataset/images/test
 ```
 This command will run inference on all the images placed inside  test/VRU_Dataset folder and save the results inside runs/detect/exp folder with all detected classes.
 
